@@ -1,0 +1,387 @@
+uid: PVForecastWidget
+tags: []
+props:
+  parameters:
+    - description: A text prop
+      label: Prop 1
+      name: prop1
+      required: false
+      type: TEXT
+    - context: item
+      description: An item to control
+      label: Item
+      name: item
+      required: false
+      type: TEXT
+  parameterGroups: []
+timestamp: Mar 18, 2026, 2:28:28 PM
+component: f7-card
+config:
+  style:
+    --f7-card-bg-color: transparent
+    background: url(/static/img/ems/Background-EnergyFlow.png)
+    background-position: center
+    background-size: cover
+  stylesheet: |
+    .arrowleft {
+       #position: absolute;
+       #top: 50%;
+       #left: 50%;
+       #transform: translate(50%,50%);
+     }
+    .arrowleft div {
+       display: block;
+       width: 0.4em;
+       height: 0.4em;
+       border-bottom: 0.15em solid var(--f7-text-color);
+       border-right: 0.15em solid var(--f7-text-color);
+       transform: rotate(135deg);
+       #margin: -25px;
+       animation: animate 2s infinite;
+    }  .arrowleft div:nth-child(2){
+        animation-delay: -0.2s;
+    }  .arrowleft div:nth-child(3){
+        animation-delay: -0.4s;
+    }  @keyframes animate {
+        0%{
+            opacity: 0;
+            transform: rotate(135deg) translate(-0.7em,-0.7em);
+        }
+        50%{
+            opacity: 1;
+        }
+        100%{
+            opacity: 0;
+            transform: rotate(135deg) translate(0.7em,0.7em);
+        }
+    }                  .arrowright {
+       #position: absolute;
+       #top: 50%;
+       #left: 50%;
+       #transform: translate(-50%,-50%);
+     }
+    .arrowright div {
+       display: block;
+       width: 0.4em;
+       height: 0.4em;
+       border-bottom: 0.15em solid var(--f7-text-color);
+       border-right: 0.15em solid var(--f7-text-color);
+       transform: rotate(-45deg);
+       #margin: -25px;
+       animation: animate2 2s infinite;
+    }    .arrowright div:nth-child(2) {
+        animation-delay: 0.2s;
+    }      .arrowright div:nth-child(3) {
+        animation-delay: 0.4s;
+    }     @keyframes animate2 {
+        0%{
+            opacity: 0;
+            transform: rotate(-45deg) translate(-0.7em,-0.7em);
+        }
+        50%{
+            opacity: 1;
+        }
+        100%{
+            opacity: 0;
+            transform: rotate(-45deg) translate(0.7em,0.7em);
+        }
+    }                     .arrowdown {
+       #position: absolute;
+       #top: 50%;
+       #left: 50%;
+       #transform: translate(-50%,-50%);
+     }
+    .arrowdown div {
+       display: block;
+       width: 0.4em;
+       height: 0.4em;
+       border-bottom: 0.15em solid var(--f7-text-color);
+       border-right: 0.15em solid var(--f7-text-color);
+       transform: rotate(90deg);
+       #margin: -25px;
+       animation: animate3 2s infinite;
+    }    .arrowdown div:nth-child(2) {
+        animation-delay: 0.2s;
+    }      .arrowdown div:nth-child(3) {
+        animation-delay: 0.4s;
+    }     @keyframes animate3 {
+        0%{
+            opacity: 0;
+            transform: rotate(45deg) translate(-0.7em,-0.7em);
+        }
+        50%{
+            opacity: 1;
+        }
+        100%{
+            opacity: 0;
+            transform: rotate(45deg) translate(0.7em,0.7em);
+        }
+    }                    .arrowup {
+       #position: absolute;
+       #top: 50%;
+       #left: 50%;
+       #transform: translate(-50%,-50%);
+     }
+    .arrowup {
+       #position: absolute;
+       #top: 50%;
+       #left: 50%;
+       #transform: translate(-50%,-50%);
+     }
+    .arrowup div {
+       display: block;
+       width: 0.4em;
+       height: 0.4em;
+       border-bottom: 0.15em solid var(--f7-text-color);
+       border-right: 0.15em solid var(--f7-text-color);
+       transform: rotate(90deg);
+       #margin: -25px;
+       animation: animate4 2s infinite;
+    }    .arrowup div:nth-child(2) {
+        animation-delay: 0.2s;
+    }      .arrowup div:nth-child(3) {
+        animation-delay: 0.4s;
+    }     @keyframes animate4 {
+        0%{
+            opacity: 0;
+            transform: rotate(-135deg) translate(-0.7em,-0.7em);
+        }
+        50%{
+            opacity: 1;
+        }
+        100%{
+            opacity: 0;
+            transform: rotate(-135deg) translate(0.7em,0.7em);
+        }
+    }   
+slots:
+  default:
+    - component: f7-row
+      slots:
+        default:
+          - component: f7-col
+            config:
+              class:
+                - display-flex
+                - align-items-center
+              style:
+                align-items: center
+                display: flex
+                flex-direction: column
+                justify-content: center
+                width: 20%
+            slots:
+              default:
+                - component: Label
+                  config:
+                    noShadow: true
+                    style:
+                      font-size: 1.2em
+                      font-weight: bold
+                      text-align: center
+                    text: =items.Smart_Forecast_Solar_WTZ_Todays_Energy_Forecast.state
+                - component: Label
+                  config:
+                    noShadow: true
+                    style:
+                      font-size: 1em
+                      font-style: italic
+                      text-align: center
+                    text: =items.Smart_Forecast_Solar_WTZ_Actual_Energy_Forecast.state
+                - component: Label
+                  config:
+                    noShadow: true
+                    style:
+                      font-size: 1em
+                      font-style: italic
+                      text-align: center
+                    text: =items.Smart_Forecast_Solar_WTZ_Remaining_Energy_Forecast.state
+          - component: f7-col
+            config:
+              class:
+                - display-flex
+              style:
+                display: flex
+                flex-direction: column
+                justify-content: center
+                width: 30%
+            slots:
+              default:
+                - component: oh-label-card
+                  config:
+                    icon: f7:sunrise
+                    item: Local_Sun_Daylight_Duration
+                    title: =items.Local_Sun_Rise_End.displayState + "     -     " +
+                      items.Local_Sun_Rise_End.displayState
+                - component: f7-row
+                  config:
+                    class:
+                      - display-flex
+                    style:
+                      display: flex
+                      flex-direction: row
+                      justify-content: center
+                  slots:
+                    default:
+                      - component: oh-icon
+                        config:
+                          icon: f7:sunrise
+                          noShadow: true
+                      - component: Label
+                        config:
+                          noShadow: true
+                          style:
+                            font-size: 1.2em
+                            font-weight: bold
+                            text-align: center
+                          text: =items.Local_Sun_Daylight_Duration.displayState
+                - component: f7-row
+                  config:
+                    class:
+                      - display-flex
+                    style:
+                      display: flex
+                      flex-direction: row
+                      justify-content: center
+                  slots:
+                    default:
+                      - component: oh-icon
+                        config:
+                          icon: f7:sunrise
+                          noShadow: true
+                      - component: Label
+                        config:
+                          noShadow: true
+                          style:
+                            font-size: 1.2em
+                            font-weight: bold
+                            text-align: center
+                          text: =items.Local_Sun_Daylight_Duration.displayState
+          - component: f7-col
+            config:
+              class:
+                - display-flex
+                - align-items-center
+              style:
+                align-items: center
+                display: flex
+                flex-direction: column
+                justify-content: center
+                width: 20%
+            slots:
+              default:
+                - component: Label
+                  config:
+                    noShadow: true
+                    style:
+                      font-size: 1em
+                      font-style: italic
+                      text-align: center
+                    text: =items.Local_Sun_Rise_End.displayState
+                - component: Label
+                  config:
+                    noShadow: true
+                    style:
+                      font-size: 1em
+                      font-style: italic
+                      text-align: center
+                    text: =items.Local_Sun_Set_Start.displayState
+    - component: f7-row
+      slots:
+        default:
+          - component: div
+            config:
+              class: card card-header-divider
+    - component: f7-row
+      slots:
+        default:
+          - component: f7-col
+            config:
+              class:
+                - display-flex
+                - align-items-center
+              style:
+                align-items: center
+                display: flex
+                flex-direction: column
+                justify-content: center
+                width: 25%
+            slots:
+              default:
+                - component: oh-icon
+                  config:
+                    icon: material:solar_power
+                    noShadow: true
+                    width: 66
+          - component: f7-col
+            config:
+              class:
+                - display-flex
+                - align-items-center
+              style:
+                display: flex
+                flex-direction: column
+                width: 75%
+            slots:
+              default:
+                - component: Label
+                  config:
+                    noShadow: true
+                    style:
+                      font-size: 2em
+                      font-weight: bold
+                    text: =items.E3DC_Power_Plant_PV_Output.displayState ||
+                      items.E3DC_Power_Plant_PV_Output.state
+                - component: Label
+                  config:
+                    noShadow: true
+                    style:
+                      font-size: 1.2em
+                      font-style: italic
+                    text: =items.Smart_Forecast_Solar_WTZ_Actual_Power.displayState ||
+                      items.Smart_Forecast_Solar_WTZ_Actual_Power.state
+    - component: f7-row
+      slots:
+        default:
+          - component: div
+            config:
+              class: card card-header-divider
+          - component: f7-col
+            config:
+              class:
+                - display-flex
+                - align-items-center
+              style:
+                align-items: center
+                display: flex
+                flex-direction: column
+                justify-content: center
+                width: 30%
+            slots:
+              default:
+                - component: oh-clock
+                - component: oh-trend
+                  config:
+                    noShadow: true
+                    trendGradient:
+                      - "#FF0"
+                      - "#F80"
+                      - "#05C"
+                    trendItem: E3DC_Power_Plant_PV_Output
+          - component: f7-col
+            config:
+              class:
+                - display-flex
+                - align-items-center
+              style:
+                align-items: center
+                display: flex
+                flex-direction: column
+                justify-content: center
+                width: 10%
+            slots:
+              default:
+                - component: oh-image
+                  config:
+                    item: Local_Weather_and_Forecast_Current_Icon
+                    noShadow: true
