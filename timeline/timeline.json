@@ -1,0 +1,47 @@
+{
+    "date": "2026-07-03",
+    "entries": [
+        {
+            "subtitle": "Event",
+            "icon": "iconify:solar:sunrise-broken",
+            "description": "Solar production begins.",
+            "time": "06:00",
+            "title": "Sunrise"
+        },
+        {
+            "subtitle": "Stop",
+            "icon": "iconify:solar:battery-bold",
+            "description": "",
+            "time": "06:22",
+            "title": "Battery Discharge"
+        },
+        {
+            "subtitle": "Start",
+            "icon": "iconify:solar:battery-bold",
+            "description": "454 W avg \u2014 household deficit 186 W",
+            "time": "21:02",
+            "title": "Battery Discharge"
+        },
+        {
+            "subtitle": "Event",
+            "icon": "iconify:solar:sunset-broken",
+            "description": "Solar production ends.",
+            "time": "21:30",
+            "title": "Sunset"
+        },
+        {
+            "subtitle": "Start",
+            "icon": "iconify:solar:battery-bold",
+            "description": "443 W avg \u2014 household deficit 473 W",
+            "time": "22:47",
+            "title": "Battery Discharge"
+        },
+        {
+            "subtitle": "Stop",
+            "icon": "iconify:solar:battery-bold",
+            "description": "",
+            "time": "22:47",
+            "title": "Battery Discharge"
+        }
+    ]
+}
