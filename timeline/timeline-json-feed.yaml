@@ -1,0 +1,74 @@
+uid: Timeline
+tags: []
+props:
+  parameters:
+    - context: item
+      description: String item linked to the plan#timeline channel of the EMS thing
+      label: Timeline Item
+      name: item
+      required: true
+      type: TEXT
+  parameterGroups: []
+timestamp: Jul 1, 2026, 11:14:43 PM
+component: f7-card
+config:
+  style:
+    --f7-card-bg-color: transparent
+    background: url(/static/img/heat.png)
+    background-position: center
+    background-size: cover
+slots:
+  default:
+    - component: f7-row
+      slots:
+        default:
+          - component: f7-col
+            slots:
+              default:
+                - component: div
+                  config:
+                    class: timeline
+                  slots:
+                    default:
+                      - component: oh-repeater
+                        config:
+                          for: entry
+                          in: =JSON.parse(items[props.item].state || '{"entries":[]}').entries
+                          sourceType: array
+                        slots:
+                          default:
+                            - component: div
+                              config:
+                                class: timeline-item
+                              slots:
+                                default:
+                                  - component: div
+                                    config:
+                                      class: timeline-item-date
+                                      content: =loop.entry.time
+                                  - component: div
+                                    config:
+                                      class: timeline-item-divider
+                                  - component: div
+                                    config:
+                                      class: timeline-item-content
+                                    slots:
+                                      default:
+                                        - component: div
+                                          config:
+                                            class: timeline-item-title
+                                            content: =loop.entry.title
+                                          slots:
+                                            default:
+                                              - component: oh-icon
+                                                config:
+                                                  icon: =loop.entry.icon
+                                                  width: 24
+                                        - component: div
+                                          config:
+                                            class: timeline-item-subtitle
+                                            content: =loop.entry.subtitle
+                                        - component: div
+                                          config:
+                                            class: timeline-item-text
+                                            content: =loop.entry.description
