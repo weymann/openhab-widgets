@@ -1,0 +1,342 @@
+uid: SunArcWidget
+tags: []
+props:
+  parameters:
+    - context: item
+      description: Sunrise time in minutes since midnight (e.g. 441 for 07:21)
+      label: Sunrise Item (minutes)
+      name: sunriseItem
+      required: true
+      type: INTEGER
+    - context: item
+      description: Sunset time in minutes since midnight (e.g. 1077 for 17:57)
+      label: Sunset Item (minutes)
+      name: sunsetItem
+      required: true
+      type: INTEGER
+    - context: item
+      description: Solar noon in minutes since midnight (e.g. 759 for 12:39)
+      label: Solar Noon Item (minutes)
+      name: solarNoonItem
+      required: false
+      type: INTEGER
+    - context: item
+      description: Total daylight duration as string (e.g. "10 hrs, 36 min")
+      label: Total Daylight Item
+      name: totalDaylightItem
+      required: false
+      type: TEXT
+  parameterGroups: []
+timestamp: Jun 17, 2026, 7:36:26 PM
+component: f7-card
+config:
+  class: sun-arc-card
+  style:
+    --f7-card-bg-color: transparent
+    background: transparent
+    padding: 0
+  stylesheet: >
+    .sun-arc-card {
+      background: linear-gradient(180deg, #1a3a5c 0%, #2d6a8a 40%, #c8956a 80%, #8b4a2a 100%);
+      border-radius: 18px;
+      overflow: hidden;
+      margin: 6px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: white;
+    }
+
+    .sun-arc-card .arc-header {
+      padding: 14px 16px 4px 16px;
+      font-size: 0.75em;
+      font-weight: 600;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 0.04em;
+    }
+
+    .sun-arc-card .arc-canvas-wrap {
+      position: relative;
+      width: 100%;
+      padding: 0 0 8px 0;
+    }
+
+    .sun-arc-card .arc-canvas-wrap svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .sun-arc-card .arc-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.15);
+      margin: 0 14px;
+    }
+
+    .sun-arc-card .arc-stats {
+      padding: 10px 16px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .sun-arc-card .arc-stat-row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .sun-arc-card .arc-stat-row:last-child {
+      border-bottom: none;
+    }
+
+    .sun-arc-card .arc-stat-left {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sun-arc-card .arc-stat-icon {
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1em;
+    }
+
+    .sun-arc-card .arc-stat-label {
+      font-size: 0.88em;
+      color: rgba(255,255,255,0.85);
+      font-weight: 400;
+    }
+
+    .sun-arc-card .arc-stat-value {
+      font-size: 0.88em;
+      color: white;
+      font-weight: 500;
+    }
+slots:
+  default:
+    - component: div
+      config:
+        class: arc-canvas-wrap
+        innerHTML: ='[[items[props.sunriseItem]?items[props.sunriseItem].numericState||360:360,items[props.sunsetItem]?items[props.sunsetItem].numericState||1080:1080]].map(a=>''<svg
+          viewBox="0 0 320 170">''+''<line x1=''22'' y1=''132'' x2=''298''
+          y2=''132'' stroke=''#1e4060'' stroke-width=''1.5''/><text x=''22''
+          y=''148'' text-anchor=''middle'' font-size=''8''
+          fill=''rgba(255,255,255,0.45)''
+          font-family=''sans-serif''>0&#58;00</text><text x=''91'' y=''148''
+          text-anchor=''middle'' font-size=''8'' fill=''rgba(255,255,255,0.45)''
+          font-family=''sans-serif''>6&#58;00</text><text x=''160'' y=''148''
+          text-anchor=''middle'' font-size=''8'' fill=''rgba(255,255,255,0.45)''
+          font-family=''sans-serif''>12&#58;00</text><text x=''229'' y=''148''
+          text-anchor=''middle'' font-size=''8'' fill=''rgba(255,255,255,0.45)''
+          font-family=''sans-serif''>18&#58;00</text>''+''<path d="''+''M
+          ''+Math.round((22+(a[0]*0/6)/1440*276)*10)/10+''
+          ''+Math.round((132+Math.sin(((a[0]*0/6)+1440-a[1])/(1440-a[1]+a[0])*Math.PI)*28)*10)/10+''
+          L ''+Math.round((22+(a[0]*1/6)/1440*276)*10)/10+''
+          ''+Math.round((132+Math.sin(((a[0]*1/6)+1440-a[1])/(1440-a[1]+a[0])*Math.PI)*28)*10)/10+''
+          L ''+Math.round((22+(a[0]*2/6)/1440*276)*10)/10+''
+          ''+Math.round((132+Math.sin(((a[0]*2/6)+1440-a[1])/(1440-a[1]+a[0])*Math.PI)*28)*10)/10+''
+          L ''+Math.round((22+(a[0]*3/6)/1440*276)*10)/10+''
+          ''+Math.round((132+Math.sin(((a[0]*3/6)+1440-a[1])/(1440-a[1]+a[0])*Math.PI)*28)*10)/10+''
+          L ''+Math.round((22+(a[0]*4/6)/1440*276)*10)/10+''
+          ''+Math.round((132+Math.sin(((a[0]*4/6)+1440-a[1])/(1440-a[1]+a[0])*Math.PI)*28)*10)/10+''
+          L ''+Math.round((22+(a[0]*5/6)/1440*276)*10)/10+''
+          ''+Math.round((132+Math.sin(((a[0]*5/6)+1440-a[1])/(1440-a[1]+a[0])*Math.PI)*28)*10)/10+''
+          L ''+Math.round((22+(a[0]*6/6)/1440*276)*10)/10+''
+          ''+Math.round((132+Math.sin(((a[0]*6/6)+1440-a[1])/(1440-a[1]+a[0])*Math.PI)*28)*10)/10+''"
+          fill="none" stroke="#2a5a8a" stroke-width="2" stroke-dasharray="4,3"
+          stroke-linecap="round"/>''+''<path d="''+''M
+          ''+Math.round((22+(a[0]+0*(a[1]-a[0])/6)/1440*276)*10)/10+''
+          ''+Math.round((132-Math.sin((a[0]+0*(a[1]-a[0])/6-a[0])/(a[1]-a[0])*Math.PI)*118)*10)/10+''
+          L ''+Math.round((22+(a[0]+1*(a[1]-a[0])/6)/1440*276)*10)/10+''
+          ''+Math.round((132-Math.sin((a[0]+1*(a[1]-a[0])/6-a[0])/(a[1]-a[0])*Math.PI)*118)*10)/10+''
+          L ''+Math.round((22+(a[0]+2*(a[1]-a[0])/6)/1440*276)*10)/10+''
+          ''+Math.round((132-Math.sin((a[0]+2*(a[1]-a[0])/6-a[0])/(a[1]-a[0])*Math.PI)*118)*10)/10+''
+          L ''+Math.round((22+(a[0]+3*(a[1]-a[0])/6)/1440*276)*10)/10+''
+          ''+Math.round((132-Math.sin((a[0]+3*(a[1]-a[0])/6-a[0])/(a[1]-a[0])*Math.PI)*118)*10)/10+''
+          L ''+Math.round((22+(a[0]+4*(a[1]-a[0])/6)/1440*276)*10)/10+''
+          ''+Math.round((132-Math.sin((a[0]+4*(a[1]-a[0])/6-a[0])/(a[1]-a[0])*Math.PI)*118)*10)/10+''
+          L ''+Math.round((22+(a[0]+5*(a[1]-a[0])/6)/1440*276)*10)/10+''
+          ''+Math.round((132-Math.sin((a[0]+5*(a[1]-a[0])/6-a[0])/(a[1]-a[0])*Math.PI)*118)*10)/10+''
+          L ''+Math.round((22+(a[0]+6*(a[1]-a[0])/6)/1440*276)*10)/10+''
+          ''+Math.round((132-Math.sin((a[0]+6*(a[1]-a[0])/6-a[0])/(a[1]-a[0])*Math.PI)*118)*10)/10+''"
+          fill="none" stroke="#FFD060" stroke-width="3"
+          stroke-linecap="round"/>''+''<path d="''+''M
+          ''+Math.round((22+(a[0]+0*(a[1]-a[0])/6)/1440*276)*10)/10+''
+          ''+Math.round((132-Math.sin((a[0]+0*(a[1]-a[0])/6-a[0])/(a[1]-a[0])*Math.PI)*118)*10)/10+''
+          L ''+Math.round((22+(a[0]+1*(a[1]-a[0])/6)/1440*276)*10)/10+''
+          ''+Math.round((132-Math.sin((a[0]+1*(a[1]-a[0])/6-a[0])/(a[1]-a[0])*Math.PI)*118)*10)/10+''
+          L ''+Math.round((22+(a[0]+2*(a[1]-a[0])/6)/1440*276)*10)/10+''
+          ''+Math.round((132-Math.sin((a[0]+2*(a[1]-a[0])/6-a[0])/(a[1]-a[0])*Math.PI)*118)*10)/10+''"
+          fill="none" stroke="#4a90d9" stroke-width="3"
+          stroke-linecap="round"/>''+''<path d="''+''M
+          ''+Math.round((22+(a[0]+4*(a[1]-a[0])/6)/1440*276)*10)/10+''
+          ''+Math.round((132-Math.sin((a[0]+4*(a[1]-a[0])/6-a[0])/(a[1]-a[0])*Math.PI)*118)*10)/10+''
+          L ''+Math.round((22+(a[0]+5*(a[1]-a[0])/6)/1440*276)*10)/10+''
+          ''+Math.round((132-Math.sin((a[0]+5*(a[1]-a[0])/6-a[0])/(a[1]-a[0])*Math.PI)*118)*10)/10+''
+          L ''+Math.round((22+(a[0]+6*(a[1]-a[0])/6)/1440*276)*10)/10+''
+          ''+Math.round((132-Math.sin((a[0]+6*(a[1]-a[0])/6-a[0])/(a[1]-a[0])*Math.PI)*118)*10)/10+''"
+          fill="none" stroke="#4a90d9" stroke-width="3"
+          stroke-linecap="round"/>''+''<path d="''+''M
+          ''+Math.round((22+(a[1]+0*(1440-a[1])/6)/1440*276)*10)/10+''
+          ''+Math.round((132+Math.sin(((a[1]+0*(1440-a[1])/6)-a[1])/(1440-a[1]+a[0])*Math.PI)*28)*10)/10+''
+          L ''+Math.round((22+(a[1]+1*(1440-a[1])/6)/1440*276)*10)/10+''
+          ''+Math.round((132+Math.sin(((a[1]+1*(1440-a[1])/6)-a[1])/(1440-a[1]+a[0])*Math.PI)*28)*10)/10+''
+          L ''+Math.round((22+(a[1]+2*(1440-a[1])/6)/1440*276)*10)/10+''
+          ''+Math.round((132+Math.sin(((a[1]+2*(1440-a[1])/6)-a[1])/(1440-a[1]+a[0])*Math.PI)*28)*10)/10+''
+          L ''+Math.round((22+(a[1]+3*(1440-a[1])/6)/1440*276)*10)/10+''
+          ''+Math.round((132+Math.sin(((a[1]+3*(1440-a[1])/6)-a[1])/(1440-a[1]+a[0])*Math.PI)*28)*10)/10+''
+          L ''+Math.round((22+(a[1]+4*(1440-a[1])/6)/1440*276)*10)/10+''
+          ''+Math.round((132+Math.sin(((a[1]+4*(1440-a[1])/6)-a[1])/(1440-a[1]+a[0])*Math.PI)*28)*10)/10+''
+          L ''+Math.round((22+(a[1]+5*(1440-a[1])/6)/1440*276)*10)/10+''
+          ''+Math.round((132+Math.sin(((a[1]+5*(1440-a[1])/6)-a[1])/(1440-a[1]+a[0])*Math.PI)*28)*10)/10+''
+          L ''+Math.round((22+(a[1]+6*(1440-a[1])/6)/1440*276)*10)/10+''
+          ''+Math.round((132+Math.sin(((a[1]+6*(1440-a[1])/6)-a[1])/(1440-a[1]+a[0])*Math.PI)*28)*10)/10+''"
+          fill="none" stroke="#2a5a8a" stroke-width="2" stroke-dasharray="4,3"
+          stroke-linecap="round"/>''+''<circle
+          cx="''+Math.round((22+(dayjs().hour()*60+dayjs().minute())/1440*276)*10)/10+''"
+          cy="''+Math.round((Math.min(1,Math.max(0,Math.ceil((a[1]-a[0]-(dayjs().hour()*60+dayjs().minute()-a[0]+1440)%1440)/1440)))*(132-Math.sin((dayjs().hour()*60+dayjs().minute()-a[0])/(a[1]-a[0])*Math.PI)*118)+(1-Math.min(1,Math.max(0,Math.ceil((a[1]-a[0]-(dayjs().hour()*60+dayjs().minute()-a[0]+1440)%1440)/1440))))*(132+Math.sin((dayjs().hour()*60+dayjs().minute()-a[1])/(1440-a[1]+a[0])*Math.PI)*28))*10)/10+''"
+          r="7" fill="#FFD060" stroke="white"
+          stroke-width="2"/>''+''</svg>'')[0]'
+    - component: div
+      config:
+        class: arc-divider
+    - component: div
+      config:
+        class: arc-stats
+      slots:
+        default:
+          - component: div
+            config:
+              class: arc-stat-row
+            slots:
+              default:
+                - component: div
+                  config:
+                    class: arc-stat-left
+                  slots:
+                    default:
+                      - component: div
+                        config:
+                          class: arc-stat-icon
+                          innerHTML: >
+                            <svg width="20" height="20" viewBox="0 0 24 24"
+                            fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <rect x="3" y="11" width="3" height="2" rx="1" fill="rgba(255,255,255,0.7)"/>
+                              <rect x="18" y="11" width="3" height="2" rx="1" fill="rgba(255,255,255,0.7)"/>
+                              <rect x="11" y="3" width="2" height="3" rx="1" fill="rgba(255,255,255,0.7)"/>
+                              <rect x="11" y="18" width="2" height="3" rx="1" fill="rgba(255,255,255,0.7)"/>
+                              <circle cx="12" cy="12" r="4" fill="rgba(255,255,255,0.7)"/>
+                            </svg>
+                      - component: div
+                        config:
+                          class: arc-stat-label
+                          innerHTML: Total daylight
+                - component: Label
+                  config:
+                    class: arc-stat-value
+                    text: '=items[props.totalDaylightItem] ? items[props.totalDaylightItem].state :
+                      "--"'
+          - component: div
+            config:
+              class: arc-stat-row
+            slots:
+              default:
+                - component: div
+                  config:
+                    class: arc-stat-left
+                  slots:
+                    default:
+                      - component: div
+                        config:
+                          class: arc-stat-icon
+                          innerHTML: >
+                            <svg width="20" height="20" viewBox="0 0 24 24"
+                            fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <path d="M12 3v2M5.22 5.22l1.42 1.42M3 12h2M19 12h2M17.36 6.64l1.42-1.42"
+                                stroke="rgba(255,255,255,0.7)" stroke-width="1.8" stroke-linecap="round"/>
+                              <path d="M5 17h14" stroke="rgba(255,255,255,0.7)" stroke-width="1.8" stroke-linecap="round"/>
+                              <path d="M12 7a5 5 0 0 1 5 5H7a5 5 0 0 1 5-5z"
+                                fill="rgba(255,255,255,0.7)"/>
+                              <path d="M9 20l3-3 3 3" stroke="rgba(255,255,255,0.7)" stroke-width="1.8"
+                                stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                      - component: div
+                        config:
+                          class: arc-stat-label
+                          innerHTML: Sunrise
+                - component: Label
+                  config:
+                    class: arc-stat-value
+                    text: =items[props.sunriseItem].state
+          - component: div
+            config:
+              class: arc-stat-row
+            slots:
+              default:
+                - component: div
+                  config:
+                    class: arc-stat-left
+                  slots:
+                    default:
+                      - component: div
+                        config:
+                          class: arc-stat-icon
+                          innerHTML: >
+                            <svg width="20" height="20" viewBox="0 0 24 24"
+                            fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <circle cx="12" cy="12" r="5" fill="rgba(255,255,255,0.7)"/>
+                              <path d="M12 2v2M12 20v2M2 12h2M20 12h2
+                                M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41
+                                M17.66 6.34l1.41-1.41M4.93 19.07l1.41-1.41"
+                                stroke="rgba(255,255,255,0.7)" stroke-width="1.8" stroke-linecap="round"/>
+                            </svg>
+                      - component: div
+                        config:
+                          class: arc-stat-label
+                          innerHTML: Solar noon
+                - component: Label
+                  config:
+                    class: arc-stat-value
+                    text: '=items[props.solarNoonItem] ? items[props.solarNoonItem].state : "--"'
+          - component: div
+            config:
+              class: arc-stat-row
+            slots:
+              default:
+                - component: div
+                  config:
+                    class: arc-stat-left
+                  slots:
+                    default:
+                      - component: div
+                        config:
+                          class: arc-stat-icon
+                          innerHTML: >
+                            <svg width="20" height="20" viewBox="0 0 24 24"
+                            fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <path d="M12 3v2M5.22 5.22l1.42 1.42M3 12h2M19 12h2M17.36 6.64l1.42-1.42"
+                                stroke="rgba(255,255,255,0.7)" stroke-width="1.8" stroke-linecap="round"/>
+                              <path d="M5 17h14" stroke="rgba(255,255,255,0.7)" stroke-width="1.8" stroke-linecap="round"/>
+                              <path d="M12 7a5 5 0 0 1 5 5H7a5 5 0 0 1 5-5z"
+                                fill="rgba(255,255,255,0.7)"/>
+                              <path d="M9 14l3 3 3-3" stroke="rgba(255,255,255,0.7)" stroke-width="1.8"
+                                stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                      - component: div
+                        config:
+                          class: arc-stat-label
+                          innerHTML: Sunset
+                - component: Label
+                  config:
+                    class: arc-stat-value
+                    text: =items[props.sunsetItem].state
